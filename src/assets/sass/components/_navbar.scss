@@ -1,0 +1,29 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  font-size: 1.2rem;
+
+  a {
+    all: unset;
+    cursor: pointer;
+    color: var(--secondary);
+    transition: all 0.2s ease-in;
+
+    &:hover {
+      border-bottom: 2px solid var(--secondary);
+    }
+
+    &.router-link-active:not(.home-link),
+    &.router-link-exact-active {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+  }
+}
