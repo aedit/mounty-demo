@@ -1,9 +1,5 @@
 <template>
-  <div></div>
+  <div class="movies">
+    <router-view></router-view>
+  </div>
 </template>
-
-<script>
-export default {}
-</script>
-
-<style></style>
