@@ -24,7 +24,7 @@ const routes = [
     children: [
       {
         path: 'top-rated',
-        component: () => import('../components/Movies/TopRated.vue'),
+        component: () => import('../components/Movies/Container.vue'),
         meta: {
           title: 'Top Rated Movies',
           component: 'top_rated'
@@ -32,7 +32,7 @@ const routes = [
       },
       {
         path: 'upcoming',
-        component: () => import('../components/Movies/Upcoming.vue'),
+        component: () => import('../components/Movies/Container.vue'),
         meta: {
           title: 'Upcoming Movies',
           component: 'upcoming'
