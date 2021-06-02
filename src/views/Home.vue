@@ -14,6 +14,12 @@
         <router-link to="/movies/upcoming">View Upcoming Movies</router-link>
       </li>
     </ul>
+    <h3>
+      Developed By
+      <a href="http://aedit.me" target="_blank" rel="noopener noreferrer">
+        Udit Sen
+      </a>
+    </h3>
   </div>
 </template>
 

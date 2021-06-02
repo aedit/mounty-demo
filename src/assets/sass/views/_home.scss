@@ -17,6 +17,11 @@
 
   h3 {
     font-size: 2rem;
+    a {
+      all: unset;
+      cursor: pointer;
+      color: var(--primary);
+    }
   }
 
   &__image {
