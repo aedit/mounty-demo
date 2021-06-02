@@ -12,6 +12,10 @@ export default new Vuex.Store({
     pageNo: {
       top_rated: 1,
       upcoming: 1
+    },
+    total_pages: {
+      top_rated: null,
+      upcoming: null
     }
   },
   getters: {
@@ -20,14 +24,20 @@ export default new Vuex.Store({
     },
     pageNo(state) {
       return (component) => state.pageNo[component]
+    },
+    total_pages(state) {
+      return (component) => state.total_pages[component]
     }
   },
   mutations: {
-    updateList(state, component, list) {
-      state.list[component].push(list)
+    updateList(state, item) {
+      Vue.set(state.list, item.component, item.list)
     },
-    updatePageNo(state, component, pageNo) {
-      state.pageNo[component] = pageNo
+    updatePageNo(state, item) {
+      state.pageNo[item.component] = item.pageNo
+    },
+    total_pages(state, item) {
+      state.total_pages[item.component] = item.total_pages
     }
   }
 })

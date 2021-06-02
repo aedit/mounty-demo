@@ -1,23 +1,26 @@
 <template>
   <div class="movies-container">
     <div v-if="loading">Loading</div>
-    <div class="movies-results" v-else-if="response.results">
-      <Card
-        v-for="(movie, index) in response.results"
-        :key="index"
-        :movie="movie"
-      ></Card>
+    <div class="movies-results" v-else-if="list">
+      <Card v-for="(movie, index) in list" :key="index" :movie="movie"></Card>
     </div>
-    <div v-else>Sorry Some Error Occurred</div>
+    <div v-else>Sorry, Some Error Occurred</div>
+    <Footer
+      :key="component"
+      :pageNo="pageNo"
+      :totalPages="total_pages"
+      @pageChange="pageChange"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Card from './Card'
+import Footer from '@/components/Footer.vue'
 
 export default {
-  components: { Card },
+  components: { Card, Footer },
   data() {
     return {
       api_key: process.env.VUE_APP_API_KEY,
@@ -28,26 +31,52 @@ export default {
   computed: {
     component() {
       return this.$route.meta.component
+    },
+    list() {
+      return this.$store.getters['list'](this.component)
+    },
+    pageNo() {
+      return this.$store.getters['pageNo'](this.component)
+    },
+    total_pages() {
+      return this.$store.getters['total_pages'](this.component)
     }
   },
+  mounted() {
+    this.getMovies(true)
+  },
   methods: {
-    getMovies() {
+    getMovies(page = this.pageNo) {
       this.loading = true
       axios
         .get(
-          `https://api.themoviedb.org/3/movie/${this.component}?api_key=${this.api_key}`
+          `https://api.themoviedb.org/3/movie/${this.component}?api_key=${this.api_key}&page=${page}`
         )
         .then((response) => {
-          this.response = response.data
+          this.$store.commit('updateList', {
+            component: this.component,
+            list: response.data.results
+          })
+          this.$store.commit('updatePageNo', {
+            component: this.component,
+            pageNo: response.data.page
+          })
+          this.$store.commit('total_pages', {
+            component: this.component,
+            total_pages: response.data.total_pages
+          })
         })
         .finally(() => {
           this.loading = false
         })
+    },
+    pageChange(page) {
+      if (!page || page > this.total_pages) return
+      this.getMovies(page)
     }
   },
   watch: {
     component: {
-      immediate: true,
       handler() {
         this.getMovies()
       }
