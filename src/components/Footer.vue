@@ -6,22 +6,6 @@
         Udit Sen
       </a>
     </span>
-    <span>
-      Page:
-      <input
-        :value="pageNo"
-        type="number"
-        min="1"
-        :max="totalPages"
-        @keyup.enter="$emit('pageChange', $event.target.value)"
-      />
-      of {{ totalPages || '' }}
-    </span>
+    <slot></slot>
   </footer>
 </template>
-
-<script>
-export default {
-  props: ['totalPages', 'pageNo']
-}
-</script>

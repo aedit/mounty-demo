@@ -5,12 +5,19 @@
       <Card v-for="(movie, index) in list" :key="index" :movie="movie"></Card>
     </div>
     <div class="movies-error" v-else>Sorry, Some Error Occurred!</div>
-    <Footer
-      :key="component"
-      :pageNo="pageNo"
-      :totalPages="total_pages"
-      @pageChange="pageChange"
-    />
+    <Footer :key="component">
+      <span>
+        Page:
+        <input
+          :value="pageNo"
+          type="number"
+          min="1"
+          :max="total_pages"
+          @keyup.enter="pageChange($event.target.value)"
+        />
+        of {{ total_pages || '' }}
+      </span>
+    </Footer>
   </div>
 </template>
 
