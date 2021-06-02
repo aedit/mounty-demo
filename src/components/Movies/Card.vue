@@ -2,10 +2,14 @@
   <div class="movies-results__card">
     <img
       class="movies-results__card__image"
-      :src="'https://image.tmdb.org/t/p/w400' + movie.backdrop_path"
+      :src="
+        movie.backdrop_path
+          ? 'https://image.tmdb.org/t/p/w500' + movie.backdrop_path
+          : 'https://via.placeholder.com/500x280.png?text=Image+Not+Available'
+      "
     />
 
-    <h2 class="movies-results__card__title">{{ movie.original_title }}</h2>
+    <h3 class="movies-results__card__title">{{ movie.original_title }}</h3>
   </div>
 </template>
 
