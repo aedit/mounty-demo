@@ -1,10 +1,10 @@
 <template>
-  <div class="movies-container">
-    <div v-if="loading">Loading</div>
-    <div class="movies-results" v-else-if="list">
+  <div>
+    <div class="movies-loading" v-if="loading">Loading...</div>
+    <div class="movies-results" v-else-if="list.length">
       <Card v-for="(movie, index) in list" :key="index" :movie="movie"></Card>
     </div>
-    <div v-else>Sorry, Some Error Occurred</div>
+    <div class="movies-error" v-else>Sorry, Some Error Occurred!</div>
     <Footer
       :key="component"
       :pageNo="pageNo"

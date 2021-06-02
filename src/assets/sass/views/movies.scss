@@ -1,4 +1,5 @@
 .movies {
+  --column-count: 4;
   padding-top: 4rem;
   padding-bottom: 4rem;
   height: 100%;
@@ -11,7 +12,7 @@
   &-results {
     padding: 2rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--column-count), 1fr);
     gap: 2rem;
     row-gap: 3rem;
     justify-content: space-evenly;
@@ -25,5 +26,32 @@
         margin-top: 1rem;
       }
     }
+  }
+
+  &-loading,
+  &-error {
+    margin-top: 2rem;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .movies {
+    --column-count: 3;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .movies {
+    --column-count: 2;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .movies {
+    --column-count: 1;
   }
 }
