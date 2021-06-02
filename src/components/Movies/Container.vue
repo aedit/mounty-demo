@@ -31,8 +31,7 @@ export default {
   data() {
     return {
       api_key: process.env.VUE_APP_API_KEY,
-      loading: true,
-      response: null
+      loading: true
     }
   },
   computed: {
@@ -48,9 +47,6 @@ export default {
     total_pages() {
       return this.$store.getters['total_pages'](this.component)
     }
-  },
-  mounted() {
-    this.getMovies(true)
   },
   methods: {
     getMovies(page = this.pageNo) {
@@ -84,8 +80,10 @@ export default {
   },
   watch: {
     component: {
+      immediate: true,
       handler() {
-        this.getMovies()
+        if (!this.list.length) this.getMovies()
+        else this.loading = false
       }
     }
   }
