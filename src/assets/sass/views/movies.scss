@@ -1,9 +1,24 @@
 .movies {
   padding-top: 4rem;
+  padding-bottom: 4rem;
   height: 100%;
 
   &__heading {
     margin-top: 2rem;
     text-align: center;
+  }
+
+  &-results {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    justify-content: space-evenly;
+
+    &__card {
+      &__image {
+        width: 100%;
+      }
+    }
   }
 }
